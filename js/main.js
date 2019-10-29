@@ -52,29 +52,35 @@ function initMorse() {
 
   let isPressing = false
 
-  document.addEventListener('keydown', () => {
+  const press = (ev) => {
     if (isPressing) return
+    if (ev.code !== 'Space') return
     isPressing = true
-
 
     synth.triggerAttack('C4')
     morse.press()
 
     clearInterval(timerId)
-  })
+  }
 
-  document.addEventListener('keyup', () => {
+  const release = (ev) => {
+    if (ev.code !== 'Space') return
+
     isPressing = false
     synth.triggerRelease()
 
     let letter = morse.release()
     current.textContent = letter
 
-    timerId = this.setTimeout(() => {
+    timerId = setTimeout(() => {
       morse.reset()
 
       banked.textContent += current.textContent
       current.textContent = ''
     }, RELEASE_DELAY)
-  })
+  }
+
+  document.addEventListener('keydown', press)
+  document.addEventListener('keyup', release)
+  document.addEventListener('blur', release)
 }

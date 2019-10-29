@@ -1,4 +1,4 @@
-const MAX_DOT = 250
+const MAX_DOT = 100
 const RELEASE_DELAY = 250
 const TREE = '__ETIANMSURWDKGOHVF_L_PJBXCYZQ__%$_#___@__+____!^=/_____7___8_90'
 
